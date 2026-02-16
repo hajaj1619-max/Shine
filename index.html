@@ -3,233 +3,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>دليل الشرح الخاص | محتوى محمي</title>
+    <title>SHEIN Partners | الدليل الاحترافي</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-color: #050505;
-            --card-bg: #121212;
-            --text-primary: #e5e5e5;
-            --text-secondary: #a3a3a3;
-            --accent-color: #7c3aed; 
-            --accent-glow: rgba(124, 58, 237, 0.3);
-            --border-color: #2a2a2a;
-            --error-color: #ef4444;
-            --success-color: #10b981;
+            --primary: #a855f7;
+            --secondary: #3b82f6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --bg-deep: #0a0a0c;
+            --card-bg: rgba(23, 23, 27, 0.9);
+            --border: rgba(255, 255, 255, 0.1);
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            -webkit-user-drag: none;
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
+        body { background: var(--bg-deep); color: #f8fafc; overflow-x: hidden; line-height: 1.6; }
+
+        .mesh-bg {
+            position: fixed; inset: 0; z-index: -1;
+            background: radial-gradient(at 0% 0%, rgba(168, 85, 247, 0.15) 0px, transparent 50%),
+                        radial-gradient(at 100% 100%, rgba(59, 130, 246, 0.1) 0px, transparent 50%);
         }
 
-        body {
-            font-family: 'Cairo', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            line-height: 1.8;
-            overflow-x: hidden;
-            min-height: 100vh;
+        .floating-sidebar {
+            position: fixed; left: 15px; top: 50%; transform: translateY(-50%);
+            z-index: 1000; background: rgba(255, 255, 255, 0.95);
+            padding: 12px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: flex; flex-direction: column; gap: 20px;
         }
+        .side-icon { width: 30px; height: 30px; cursor: pointer; transition: 0.3s; }
+        .side-icon:hover { transform: scale(1.2); }
 
-        /* شاشة تسجيل الدخول */
-        #login-screen {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at center, #1a1a2e 0%, #000000 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            flex-direction: column;
+        .media-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.9);
+            display: none; align-items: center; justify-content: center; z-index: 2000;
             padding: 20px;
-            transition: opacity 0.5s ease;
         }
+        .media-content { position: relative; width: 95%; max-width: 500px; background: #000; border-radius: 15px; overflow: hidden; }
+        .close-media { position: absolute; top: 10px; right: 10px; color: #fff; font-size: 30px; cursor: pointer; z-index: 2001; }
 
-        .login-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border-color);
-            padding: 40px 30px;
-            border-radius: 20px;
-            text-align: center;
-            max-width: 400px;
-            width: 100%;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            animation: fadeIn 0.8s ease-out;
+        .container { width: 100%; max-width: 650px; margin: 0 auto; padding: 40px 15px; }
+        header { text-align: center; margin-bottom: 50px; }
+        header h1 { font-size: 28px; font-weight: 900; background: linear-gradient(to left, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        .content-card {
+            background: var(--card-bg); border: 1px solid var(--border);
+            border-radius: 25px; padding: 25px; margin-bottom: 30px;
         }
+        .section-title { font-size: 20px; font-weight: 800; color: var(--primary); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        
+        .alert-box { padding: 15px; border-radius: 15px; margin: 15px 0; font-size: 14px; border-right: 5px solid; }
+        .alert-purple { background: rgba(168, 85, 247, 0.1); border-color: var(--primary); }
+        .alert-blue { background: rgba(59, 130, 246, 0.1); border-color: var(--secondary); }
+        .alert-green { background: rgba(16, 185, 129, 0.1); border-color: var(--success); }
+        .alert-orange { background: rgba(245, 158, 11, 0.1); border-color: var(--warning); }
 
-        .password-input {
-            width: 100%;
-            padding: 15px;
-            background: #000;
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            color: #fff;
-            font-family: inherit;
-            font-size: 16px;
-            text-align: center;
-            outline: none;
-            transition: all 0.3s ease;
-        }
+        .image-preview { width: 100%; border-radius: 15px; margin: 15px 0; border: 1px solid var(--border); }
 
-        .password-input:focus {
-            border-color: var(--accent-color);
-            box-shadow: 0 0 15px var(--accent-glow);
-        }
+        .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+        .feature-item { background: rgba(255,255,255,0.05); padding: 10px; border-radius: 10px; font-size: 13px; }
+        .feature-item b { color: var(--secondary); display: block; }
 
-        /* كلاس الاهتزاز عند الخطأ - هذا ما كان ينقصك */
-        .shake {
-            animation: shake 0.4s ease-in-out;
-            border-color: var(--error-color) !important;
-        }
+        /* 🏁 تنسيق التواصل والختام */
+        .contact-section { margin-top: 40px; padding: 20px; background: rgba(255,255,255,0.03); border-radius: 20px; border: 1px dashed var(--border); text-align: center; }
+        .contact-link { display: block; color: var(--primary); text-decoration: none; margin: 10px 0; font-weight: 700; transition: 0.3s; }
+        .contact-link:hover { opacity: 0.8; transform: scale(1.02); }
 
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-8px); }
-            75% { transform: translateX(8px); }
-        }
+        footer { text-align: center; padding: 50px 0; color: var(--text-muted); font-size: 12px; opacity: 0.6; }
 
-        .login-btn {
-            width: 100%;
-            padding: 15px;
-            background: var(--accent-color);
-            color: #fff;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: transform 0.2s, background 0.3s;
-            font-family: 'Cairo', sans-serif;
-        }
-
-        #content-screen {
-            display: none;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 60px 20px 100px;
-        }
-
-        .section-title {
-            border-right: 4px solid var(--accent-color);
-            padding-right: 15px;
-            margin-bottom: 20px;
-            color: #fff;
-        }
-
-        .notice-box {
-            background: rgba(234, 179, 8, 0.1);
-            border-right: 4px solid #eab308;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 30px 0;
-        }
-
-        .image-container {
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            overflow: hidden;
-            margin: 30px 0;
-            background: var(--card-bg);
-        }
-
-        .image-wrapper img { width: 100%; display: block; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        #login-gate { position: fixed; inset: 0; z-index: 5000; background: #000; display: flex; align-items: center; justify-content: center; }
+        .login-box { background: var(--card-bg); padding: 40px; border-radius: 30px; text-align: center; width: 90%; max-width: 400px; border: 1px solid var(--border); }
+        .pw-field { width: 100%; padding: 15px; margin: 20px 0; border-radius: 15px; border: none; text-align: center; font-size: 20px; }
+        .btn-enter { width: 100%; padding: 15px; background: var(--primary); color: #fff; border: none; border-radius: 15px; font-weight: 900; cursor: pointer; }
     </style>
 </head>
-<body oncontextmenu="return false;">
+<body>
 
-    <div id="login-screen">
-        <div class="login-card">
-            <span style="font-size: 40px; margin-bottom: 20px; display: block;">🔒</span>
-            <h2 style="margin-bottom: 10px;">منطقة الشرح الخاصة</h2>
-            <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 30px;">هذا المحتوى محمي. الرجاء إدخال رمز الدخول.</p>
-            
-            <input type="password" id="passwordInput" class="password-input" placeholder="أدخل الرمز السري هنا" autocomplete="off">
-            <button class="login-btn" onclick="attemptLogin()" style="margin-top: 20px;">دخول آمن</button>
-            <div id="errorMsg" style="color: var(--error-color); font-size: 13px; margin-top: 15px; display: none;">رمز الدخول غير صحيح</div>
+    <div class="mesh-bg"></div>
+
+    <div id="login-gate">
+        <div class="login-box">
+            <h2>🔐 دخول خاص</h2>
+            <input type="password" id="pw" class="pw-field" placeholder="أدخل الرمز">
+            <button class="btn-enter" onclick="checkAuth()">دخول النظام</button>
         </div>
     </div>
 
-    <div id="content-screen">
-        <header style="text-align: center; margin-bottom: 50px;">
-            <h1 style="font-size: 28px; margin-bottom: 10px;">دليل التسجيل والربح من برنامج شركاء SHEIN</h1>
-            <p style="color: var(--text-secondary);">شرح كامل من البداية حتى استلام الأرباح</p>
+    <div class="floating-sidebar" id="sidebar" style="display:none;">
+        <img src="https://cdn-icons-png.flaticon.com/512/1179/1179069.png" class="side-icon" onclick="openMedia('video')" title="شرح فيديو">
+        <img src="https://cdn-icons-png.flaticon.com/512/3342/3342137.png" class="side-icon" onclick="openMedia('image')" title="صورة توضيحية">
+    </div>
+
+    <div class="media-overlay" id="mediaOverlay" onclick="closeMedia()">
+        <span class="close-media">&times;</span>
+        <div class="media-content" onclick="event.stopPropagation()">
+            <div id="mediaContainer"></div>
+        </div>
+    </div>
+
+    <div class="container" id="mainContent" style="display:none;">
+        <header>
+            <h1>المنصة الاحترافية لشركاء SHEIN</h1>
+            <p style="opacity: 0.8; font-size: 14px; margin-top: 10px;">دليلك الشامل لتحويل النقرات إلى أرباح حقيقية</p>
         </header>
 
-        <section>
-            <h2 class="section-title">1) الدخول لبرنامج الشركاء</h2>
-            <p>بعد الدخول للتطبيق، توجه لقسم "Partner Program" لتظهر لك لوحة التحكم الخاصة بك.</p>
-            <div class="image-container">
-                <div class="image-wrapper">
-                    <img src="https://via.placeholder.com/800x450/1a1a1a/ffffff?text=SHEIN+Dashboard" alt="شرح 1">
-                </div>
+        <div class="content-card">
+            <div class="section-title">🚀 القاعدة الذهبية للربح</div>
+            <div class="alert-box alert-orange">
+                <strong>أهم نصيحة:</strong> ركز ترويجك فقط على <strong>كود خصم الـ 50%</strong> للمستخدمين الجدد. هذا هو "المغناطيس" الذي سيجذب أكبر عدد من العملاء ويحقق لك عمولات ضخمة بسرعة.
             </div>
-        </section>
-
-        <div class="notice-box">
-            <strong>📌 ملاحظة:</strong> الربح يعتمد بشكل أساسي على جلب مستخدمين جدد يقومون بالطلب لأول مرة عبر رابطك.
         </div>
+
+        <div class="content-card">
+            <div class="section-title">📊 01-02 مركز البيانات والأرباح</div>
+            <p>من هنا تتابع أداءك اليومي. الصورة توضح سجل الأرباح والمسحوبات.</p>
+            <img src="IMG_5855.png" class="image-preview" alt="سجل الأرباح">
+            <div class="features-grid">
+                <div class="feature-item"><b>الرصيد المتوفر:</b> المبلغ الجاهز للسحب فوراً.</div>
+                <div class="feature-item"><b>قيد الانتظار:</b> أرباح بانتظار تأكيد شحن الطلبات.</div>
+                <div class="feature-item"><b>السحوبات:</b> مجموع المبالغ التي وصلت لحسابك.</div>
+                <div class="feature-item"><b>مركز البيانات:</b> تحليل النقرات والمبيعات اليومية.</div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <div class="section-title">🎁 03-05 قسيمة الـ 50% للمستجدين</div>
+            <p>هذا هو سلاحك التسويقي الأقوى. تأكد من نسخ الرابط الخاص بهذه الحملة تحديداً.</p>
+            <img src="IMG_5858.jpeg" class="image-preview">
+            <div class="alert-box alert-green">
+                <strong>كيف تعمل؟</strong> بمجرد ضغط العميل الجديد على الرابط، يحصل على خصم 50%، وتحصل أنت على مكافأة ثابتة + عمولة.
+            </div>
+        </div>
+
+        <div class="content-card">
+            <div class="section-title">🔗 06-08 ميزة "تحويل الرابط"</div>
+            <p>إذا أعجبك منتج معين في شي إن، يمكنك تحويل رابطه العادي إلى "رابط ربحي" عبر هذه الخاصية.</p>
+            <img src="IMG_5860.png" class="image-preview">
+            <div class="alert-box alert-blue">
+                فقط الصق رابط المنتج واضغط <strong>"تأكيد"</strong> ليتم توليد رابطك الخاص.
+            </div>
+        </div>
+
+        <div class="content-card">
+            <div class="section-title">💰 09-11 فهم نظام العمولات</div>
+            <p>تختلف النسب حسب الفئة، وتصل إلى 20% لبعض الأصناف.</p>
+            <img src="IMG_5862.jpg" class="image-preview">
+            <div class="features-grid">
+                <div class="feature-item"><b>المستخدم الجديد:</b> عمولته دائماً هي الأعلى (حتى 20%).</div>
+                <div class="feature-item"><b>المستخدم القديم:</b> عمولته أقل (تصل لـ 2%).</div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <div class="section-title">📣 12-13 أدوات النشر السريع</div>
+            <p>شي إن يوفر لك "نصوص جاهزة" وصور دعائية احترافية لتوفير وقتك.</p>
+            <img src="IMG_5861.jpg" class="image-preview">
+            <div class="alert-box alert-purple">
+                استخدم زر <strong>"شارك لتكسب"</strong> لنسخ الرابط والصورة معاً بضغطة واحدة.
+            </div>
+        </div>
+
+        <div class="content-card">
+            <div class="section-title">📝 الخلاصة: كيف تبدأ الربح الآن؟</div>
+            <div class="alert-box alert-green">
+                <strong>لتحقيق أفضل النتائج، اتبع هذه الخطوات المختصرة:</strong>
+                <ul style="margin-top: 10px; padding-right: 20px;">
+                    <li>ادخل قسم <strong>"الحملة"</strong> واستخرج رابط خصم الـ 50% للمستخدمين الجدد.</li>
+                    <li>قم بنشر الرابط في مجموعات <strong>تيليجرام</strong> وقنوات العروض الخاصة بك.</li>
+                    <li>استخدم ميزة <strong>"تحويل الرابط"</strong> لأي منتج تراه "ترند" حالياً لزيادة العمولات.</li>
+                    <li>تأكد دائماً من تنبيه المستخدمين أن الطلب يجب أن يتم عبر <strong>تطبيق SHEIN</strong> حصراً لضمان احتساب عمولتك.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="contact-section">
+            <h3 style="margin-bottom: 15px;">💬 تواصل معنا</h3>
+            <p style="font-size: 14px; opacity: 0.8;">لديك استفسار أو واجهت مشكلة؟ نحن هنا للمساعدة</p>
+            <a href="mailto:solbtcmana@gmail.com" class="contact-link">📧 البريد الإلكتروني: solbtcmana@gmail.com</a>
+            <a href="https://t.me/tt90010" class="contact-link" target="_blank">✈️ تيلجرام: @tt90010</a>
+        </div>
+
+        <footer>
+            جميع الحقوق محفوظة لشركاء SHEIN | 2026<br>
+            ID: <span id="deviceId"></span>
+        </footer>
     </div>
 
     <script>
-        const CONFIG = {
-            PASSWORD: "2024", 
-            STORAGE_KEY: "secure_session_v1"
-        };
+        function checkAuth() {
+            if(document.getElementById('pw').value === "2024") {
+                document.getElementById('login-gate').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+                document.getElementById('sidebar').style.display = 'flex';
+                document.getElementById('deviceId').innerText = btoa(navigator.userAgent).substr(0,8);
+            } else { alert("الرمز خاطئ!"); }
+        }
 
-        const loginScreen = document.getElementById('login-screen');
-        const contentScreen = document.getElementById('content-screen');
-        const passwordInput = document.getElementById('passwordInput');
-        const errorMsg = document.getElementById('errorMsg');
-
-        // التحقق عند الفتح
-        window.onload = () => {
-            if (localStorage.getItem(CONFIG.STORAGE_KEY) === "active") {
-                unlockContent();
-            }
-        };
-
-        function attemptLogin() {
-            if (passwordInput.value === CONFIG.PASSWORD) {
-                localStorage.setItem(CONFIG.STORAGE_KEY, "active");
-                unlockContent();
+        function openMedia(type) {
+            const container = document.getElementById('mediaContainer');
+            const overlay = document.getElementById('mediaOverlay');
+            if(type === 'video') {
+                container.innerHTML = `<iframe width="100%" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>`;
             } else {
-                errorMsg.style.display = 'block';
-                passwordInput.classList.add('shake');
-                setTimeout(() => passwordInput.classList.remove('shake'), 400);
+                container.innerHTML = `<img src="IMG_5863.jpeg" style="width:100%; border-radius:10px;">`;
             }
+            overlay.style.display = 'flex';
         }
 
-        function unlockContent() {
-            loginScreen.style.opacity = '0';
-            setTimeout(() => {
-                loginScreen.style.display = 'none';
-                contentScreen.style.display = 'block';
-            }, 500);
+        function closeMedia() {
+            document.getElementById('mediaOverlay').style.display = 'none';
+            document.getElementById('mediaContainer').innerHTML = '';
         }
 
-        // دعم زر Enter
-        passwordInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') attemptLogin();
-        });
-
-        // حماية إضافية
-        document.addEventListener('keydown', (e) => {
-            if (e.ctrlKey && (e.key === 'c' || e.key === 'u' || e.key === 's')) e.preventDefault();
-        });
+        document.addEventListener('contextmenu', e => e.preventDefault());
     </script>
 </body>
 </html>
