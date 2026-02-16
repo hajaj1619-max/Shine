@@ -116,6 +116,80 @@
                 <strong>أهم نصيحة:</strong> ركز ترويجك فقط على <strong>كود خصم الـ 50%</strong> للمستخدمين الجدد. هذا هو "المغناطيس" الذي سيجذب أكبر عدد من العملاء ويحقق لك عمولات ضخمة بسرعة.
             </div>
         </div>
+        <div class="content-card">
+    <div class="section-title">🖼️ معرض العروض (5 صور)</div>
+    <div class="slider-container" id="slider1">
+        <img src="img1.jpg" class="slide active">
+        <img src="img2.jpg" class="slide">
+        <img src="img3.jpg" class="slide">
+        <img src="img4.jpg" class="slide">
+        <img src="img5.jpg" class="slide">
+    </div>
+</div>
+
+<div class="content-card">
+    <div class="section-title">🖼️ معرض المنتجات (7 صور)</div>
+    <div class="slider-container" id="slider2">
+        <img src="p1.jpg" class="slide active">
+        <img src="p2.jpg" class="slide">
+        <img src="p3.jpg" class="slide">
+        <img src="p4.jpg" class="slide">
+        <img src="p5.jpg" class="slide">
+        <img src="p6.jpg" class="slide">
+        <img src="p7.jpg" class="slide">
+    </div>
+</div>
+
+<style>
+    /* تنسيق عارض الصور */
+    .slider-container {
+        position: relative;
+        width: 100%;
+        height: 250px; /* يمكنك تعديل الارتفاع حسب الرغبة */
+        border-radius: 15px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        background: #000;
+    }
+
+    .slide {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+    }
+
+    .slide.active {
+        opacity: 1;
+    }
+</style>
+
+<script>
+    function startSlider(sliderId) {
+        const slides = document.querySelectorAll(`#${sliderId} .slide`);
+        let currentIndex = 0;
+
+        setInterval(() => {
+            // إخفاء الصورة الحالية
+            slides[currentIndex].classList.remove('active');
+            
+            // الانتقال للصورة التالية
+            currentIndex = (currentIndex + 1) % slides.length;
+            
+            // إظهار الصورة الجديدة
+            slides[currentIndex].classList.add('active');
+        }, 4000); // 4000 ميلي ثانية = 4 ثوانٍ
+    }
+
+    // تشغيل العارضين عند تحميل الصفحة
+    window.addEventListener('load', () => {
+        startSlider('slider1');
+        startSlider('slider2');
+    });
+</script>
+        
 
         <div class="content-card">
             <div class="section-title">📊 01-02 مركز البيانات والأرباح</div>
