@@ -109,34 +109,36 @@
             <h1>المنصة الاحترافية لشركاء SHEIN</h1>
             <p style="opacity: 0.8; font-size: 14px; margin-top: 10px;">دليلك الشامل لتحويل النقرات إلى أرباح حقيقية</p>
             
-        </header>
-        <div class="content-card">
+        </header><div class="content-card">
     <div class="section-title">🎥 فيديو تعليمي</div>
     
     <div class="video-container">
-        <iframe 
-            src="Z.MP4" 
-            title="YouTube video player" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen>
-         WattsApp
-        </iframe>
+        <video controls playsinline style="width: 100%; height: 100%; object-fit: contain;">
+            <source src="Z.MP4" type="video/mp4">
+            متصفحك لا يدعم تشغيل الفيديو.
+        </video>
     </div>
 
     <div class="alert-box alert-blue" style="margin-top: 15px;">
         <strong>💡 ملاحظة هامة:</strong>
         <p style="font-size: 13px;">هذا الفيديو يوضح لك بالتفصيل كيفية تطبيق الخطوات السابقة بشكل عملي داخل تطبيق شي إن (SHEIN).</p>
     </div>
+
+    <div style="margin-top: 10px; text-align: center; font-size: 12px; color: var(--text-muted);">
+        <p>تم شرح الفيديو من قبل صانعة المحتوى <strong>NetProGain</strong></p>
+        <a href="https://youtube.com/@netprogain?si=zGwW0jUVMTWKoARi" target="_blank" style="color: var(--secondary); text-decoration: none; font-weight: bold; display: inline-block; margin-top: 5px;">
+            🔗 لمحة عن القناة
+        </a>
+    </div>
 </div>
 
 <style>
-    /* تنسيق إطار الفيديو ليتناسب مع الجوال */
+    /* تنسيق إطار الفيديو ليتناسب مع الجوال بالمقاس الكامل */
     .video-container {
         position: relative;
         width: 100%;
-        /* أبعاد الفيديو الاحترافية (16:9) */
-        aspect-ratio: 16 / 9; 
+        /* تم التعديل إلى 9:16 ليناسب الفيديوهات الطولية للجوال */
+        aspect-ratio: 9 / 16; 
         background: #000;
         border-radius: 15px;
         overflow: hidden;
@@ -144,18 +146,18 @@
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     }
 
-    .video-container iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
+    .video-container video {
         width: 100%;
         height: 100%;
+        display: block;
     }
 
-    /* جعل الكود يعمل بسلاسة عند تدوير الشاشة */
+    /* ضمان التناسق على مختلف أحجام الشاشات */
     @media (max-width: 480px) {
         .video-container {
             border-radius: 10px;
+            /* تقليل الارتفاع قليلاً في الجوالات الصغيرة لسهولة التصفح */
+            max-height: 80vh; 
         }
     }
 </style>
