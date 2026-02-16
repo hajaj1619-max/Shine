@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>دليل الشرح الخاص | محتوى محمي</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #050505;
+            --card-bg: #111111;
+            --accent-color: #7c3aed;
+            --accent-glow: rgba(124, 58, 237, 0.4);
+            --text-primary: #ffffff;
+            --text-secondary: #a3a3a3;
+            --border-color: #262626;
+            --error-color: #ef4444;
+            --notice-bg: rgba(234, 179, 8, 0.1);
+            --notice-border: #eab308;
+            --danger-bg: rgba(239, 68, 68, 0.1);
+            --danger-border: #ef4444;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* 🔒 شاشة تسجيل الدخول */
+        #login-gate {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, #1a1a2e 0%, #000 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            padding: 20px;
+        }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(25px);
+            border: 1px solid var(--border-color);
+            padding: 40px;
+            border-radius: 28px;
+            text-align: center;
+            max-width: 450px;
+            width: 100%;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+        }
+
+        .login-card h1 { font-size: 26px; font-weight: 800; margin-bottom: 10px; }
+        .login-card p { color: var(--text-secondary); margin-bottom: 30px; font-size: 14px; }
+
+        .pw-input {
+            width: 100%;
+            padding: 16px;
+            background: #000;
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            color: #fff;
+            text-align: center;
+            font-size: 20px;
+            outline: none;
+            transition: 0.3s;
+            margin-bottom: 20px;
+        }
+        .pw-input:focus { border-color: var(--accent-color); box-shadow: 0 0 15px var(--accent-glow); }
+
+        .login-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--accent-color);
+            color: #fff;
+            border: none;
+            border-radius: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+
+        /* 🚫 شاشة حظر الجهاز الثاني */
+        #device-blocker {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #000;
+            z-index: 10001;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* 📖 محتوى الشرح الرئيسي */
+        #main-content {
+            display: none;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .header-section { text-align: center; margin-bottom: 80px; }
+        .header-section h1 { font-size: clamp(26px, 6vw, 42px); font-weight: 900; line-height: 1.2; margin-bottom: 20px; color: #fff; }
+        .header-section p { color: var(--text-secondary); font-size: 18px; }
+
+        .section-block { margin-bottom: 70px; }
+        .section-title { 
+            font-size: 24px; font-weight: 700; color: #fff; 
+            margin-bottom: 20px; border-right: 5px solid var(--accent-color);
+            padding-right: 15px;
+        }
+
+        .text-content { color: var(--text-secondary); font-size: 17px; margin-bottom: 20px; }
+        
+        /* بلوك الصور الفاخر */
+        .image-container {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 30px 0;
+        }
+        .image-container img { width: 100%; display: block; -webkit-user-drag: none; pointer-events: none; }
+        .image-caption { padding: 18px; background: rgba(255,255,255,0.02); color: var(--text-secondary); font-size: 15px; border-top: 1px solid var(--border-color); }
+        .image-caption strong { color: var(--accent-color); }
+
+        /* بلوك الفيديو */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0; overflow: hidden;
+            border-radius: 20px;
+            background: #000;
+            margin: 30px 0;
+            border: 1px solid var(--border-color);
+        }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
+        /* الصناديق */
+        .notice-box {
+            background: var(--notice-bg);
+            border-right: 4px solid var(--notice-border);
+            padding: 25px;
+            border-radius: 14px;
+            margin: 30px 0;
+        }
+        .danger-box {
+            background: var(--danger-bg);
+            border-right: 4px solid var(--danger-border);
+            padding: 25px;
+            border-radius: 14px;
+            margin: 30px 0;
+        }
+
+        ul, ol { margin-right: 25px; margin-bottom: 20px; color: var(--text-secondary); }
+        li { margin-bottom: 10px; }
+
+        .footer-note {
+            text-align: center;
+            padding: 60px 0;
+            color: #333;
+            font-size: 12px;
+            border-top: 1px solid #111;
+            margin-top: 100px;
+        }
+
+        .shake { animation: shake 0.4s ease-in-out; }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
+    </style>
+</head>
+<body oncontextmenu="return false;">
+
+    <div id="login-gate">
+        <div class="login-card">
+            <div style="font-size: 45px; margin-bottom: 15px;">🔒</div>
+            <h1>صفحة الشرح الخاصة</h1>
+            <p>هذه الصفحة خاصة ولا يمكن فتحها إلا برقم الدخول</p>
+            <input type="password" id="passwordField" class="pw-input" placeholder="أدخل الرقم السري">
+            <button class="login-btn" onclick="validateLogin()">دخول</button>
+            <div id="error-msg" style="color: var(--error-color); margin-top: 15px; display: none; font-size: 14px;">رمز الدخول غير صحيح</div>
+        </div>
+    </div>
+
+    <div id="device-blocker">
+        <div>
+            <div style="font-size: 60px; margin-bottom: 20px;">🚫</div>
+            <h1 style="color: var(--error-color);">هذه الصفحة مرتبطة بجهاز واحد فقط</h1>
+            <p style="color: #666; margin-top: 10px;">لا يمكنك فتح المحتوى من جهازين مختلفين.</p>
+        </div>
+    </div>
+
+    <div id="main-content">
+        
+        <header class="header-section">
+            <h1>دليل التسجيل والربح من برنامج شركاء SHEIN (بالصور والفيديو)</h1>
+            <p>شرح مختصر وواضح يخلّيك تفهم الطريقة كاملة من أول دخول حتى مشاركة الرابط والربح.</p>
+        </header>
+
+        <section class="section-block">
+            <div class="notice-box">
+                <strong style="color: var(--notice-border); font-size: 18px;">📌 قبل ما نبدأ</strong>
+                <p style="margin-top: 10px;">هذا الدليل مخصص لبرنامج SHEIN Partners / Affiliate. هدفك: ✅ تسوّق عروض شي إن + تجيب مستخدمين جدد + تربح مكافأة + عمولة.</p>
+            </div>
+        </section>
+
+        <section class="section-block">
+            <h2 class="section-title">1) الدخول لبرنامج الشركاء</h2>
+            <div class="text-content">
+                <strong>الهدف من هذه الخطوة:</strong> تدخل للوحة الشركاء عشان تشوف: الرصيد – الحملات – التحويل/الروابط – سجل الأرباح.
+                <ul style="margin-top: 15px;">
+                    <li>افتح شي إن (تطبيق أو موقع).</li>
+                    <li>ادخل على برنامج الشركاء.</li>
+                    <li>بتظهر لك لوحة فيها الرصيد وكود الدعوة.</li>
+                </ul>
+                <div class="notice-box">📌 <strong>ملاحظة مهمة:</strong> هذي لوحة أفلييت (مسوّق) وليست صفحة شراء عادية.</div>
+            </div>
+            <div class="image-container">
+                <img src="https://via.placeholder.com/800x450/111/7c3aed?text=Image+1" alt="شرح 1">
+                <div class="image-caption"><strong>شرح الصورة:</strong> هنا يظهر لك الرصيد المتوفر + خيار السحب + كود الدعوة الخاص بك.</div>
+            </div>
+        </section>
+
+        <section class="section-block">
+            <h2 class="section-title">2) مكان الربح الحقيقي: تبويب “الحملة”</h2>
+            <div class="text-content">
+                <strong>ليش هذا القسم مهم؟</strong> لأنه يحتوي كل العروض الجاهزة اللي بتسوقها: كوبونات خصم، حملات مستخدم جديد، صور دعائية جاهزة.
+                <ol style="margin-top: 15px;">
+                    <li>من الشريط أو الصفحة الرئيسية اختر الحملة.</li>
+                    <li>بتشوف قائمة بالعروض المتاحة.</li>
+                </ol>
+            </div>
+            <div class="image-container">
+                <img src="https://via.placeholder.com/800x450/111/7c3aed?text=Image+2" alt="شرح 2">
+                <div class="image-caption"><strong>شرح الصورة:</strong> المكان المحدد هو تبويب الحملة وهذا المكان اللي تختار منه العروض للتسويق.</div>
+            </div>
+        </section>
+
+        <section class="section-block">
+            <h2 class="section-title">3) حملة مكافأة المستخدم الجديد (15$)</h2>
+            <div class="text-content">
+                <strong>فكرة الحملة باختصار:</strong> كل شخص جديد على شي إن يسوي أول شراء عبر رابطك = تربح 15$.
+                <br><br>
+                <strong>وش يعني مستخدم جديد؟</strong> يعني شخص ما قد طلب من شي إن سابقاً (أول طلب له).
+            </div>
+            <div class="image-container">
+                <img src="https://via.placeholder.com/800x450/111/7c3aed?text=Image+3" alt="شرح 3">
+                <div class="image-caption"><strong>شرح الصورة:</strong> هذه حملة المكافأة الإضافية 15$ للمستخدمين الجدد.</div>
+            </div>
+        </section>
+
+        <section class="section-block">
+            <h2 class="section-title">4) الشروط الدقيقة للحصول على 15$</h2>
+            <div class="text-content">
+                عشان تتأكد إنك تستحق المكافأة لازم المستخدم الجديد يسوي التالي:
+                <ul>
+                    <li>يحمل تطبيق SHEIN (مهم).</li>
+                    <li>يدخل عن طريق رابطك/كودك.</li>
+                    <li>يسوي أول طلب من التطبيق.</li>
+                </ul>
+            </div>
+            <div class="danger-box">
+                <strong style="color: var(--danger-border);">📌 مهم جداً:</strong> لو اشترى من المتصفح (Safari/Chrome) أحياناً ما تنحسب المكافأة.
+            </div>
+            <div class="image-container">
+                <img src="https://via.placeholder.com/800x450/111/7c3aed?text=Image+4" alt="شرح 4">
+                <div class="image-caption"><strong>شرح الصورة:</strong> توضيح الشروط وكيف المستخدم الجديد لازم ينفذ أول طلب من خلال التطبيق.</div>
+            </div>
+        </section>
+
+        <section class="section-block">
+            <h2 class="section-title">5) الدول المتاحة للحملة</h2>
+            <div class="text-content">الحملة غالباً تكون مخصصة لدول معينة (الخليج وبعض الدول العربية). قبل ما تسوق تأكد إن جمهورك من الدول المشمولة.</div>
+            <div class="image-container">
+                <img src="https://via.placeholder.com/800x450/111/7c3aed?text=Image+5" alt="شرح 5">
+                <div class="image-caption"><strong>شرح الصورة:</strong> قائمة الدول اللي تنطبق عليها الحملة.</div>
+            </div>
+        </section>
+
+        <section class="section-block">
+            <h2 class="section-title">6) كيف تُحسب أرباحك (مكافأة + عمولة)</h2>
+            <div class="text-content">
+                أرباحك نوعين:
+                <br>✅ <strong>أولاً:</strong> مكافأة المستخدم الجديد (15$ عند تحقق الشروط).
+                <br>✅ <strong>ثانياً:</strong> عمولة على عملية الشراء (نسبة من قيمة الطلب).
+                <br><br>بمعنى: ممكن تربح من نفس الشخص مكافأة + عمولة مع بعض.
+            </div>
+            <div class="image-container">
+                <img src="https://via.placeholder.com/800x450/111/7c3aed?text=Image+6" alt="شرح 6">
+                <div class="image-caption"><strong>شرح الصورة:</strong> يوضح أن المكافأة تُضاف لحسابك بالإضافة للعمولة.</div>
+            </div>
+        </section>
+
+        <section class="section-block">
+            <h2 class="section-title">7) جدول العمولات</h2>
+            <div class="text-content">هنا تلاحظ فرق كبير: المستخدم الجديد عمولته أعلى (قد تصل 20%)، والمستخدم القديم عمولته أقل (مثلاً 2%).</div>
+            <div class="image-container">
+                <img src="https://via.placeholder.com/800x450/111/7c3aed?text=Image+7" alt="شرح 7">
+                <div class="image-caption"><strong>شرح الصورة:</strong> جدول نسبة العمولة حسب نوع المستخدم وتصنيفات المنتجات.</div>
+            </div>
+        </section>
+
+        <section class="section-block">
+            <h2 class="section-title">8) استخراج الرابط/الكود للمشاركة</h2>
+            <div class="text-content">بعد ما تختار الحملة: اضغط "شارك لتكسب" وبيطلع لك خيار نسخ الرابط أو الكود.</div>
+            <div class="image-container">
+                <img src="https://via.placeholder.com/800x450/111/7c3aed?text=Image+8" alt="شرح 8">
+                <div class="image-caption"><strong>شرح الصورة:</strong> صفحة “شارك لتكسب” وفيها خيارات نسخ الرابط/الكود.</div>
+            </div>
+        </section>
+
+        <section class="section-block">
+            <h2 class="section-title">9) النص الجاهز للمشاركة</h2>
+            <div class="text-content">شي إن يعطيك رسالة جاهزة تنشرها في تيليجرام، واتساب، سناب، تويتر، تيك توك.</div>
+            <div class="image-container">
+                <img src="https://via.placeholder.com/800x450/111/7c3aed?text=Image+9" alt="شرح 9">
+                <div class="image-caption"><strong>شرح الصورة:</strong> الرسالة الجاهزة + زر نسخ الكود ونسخ الرابط.</div>
+            </div>
+        </section>
+
+        <section class="section-block">
+            <h2 class="section-title">10) فيديو سريع يشرح العملية</h2>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
+            </div>
+            <p style="text-align: center; color: var(--text-secondary); font-size: 15px;">طريقة مشاركة رابط شي إن وحساب الربح خلال دقيقة</p>
+            <div class="notice-box" style="text-align: center;"><strong>ركز على المستخدمين الجدد — شرط التطبيق مهم.</strong></div>
+        </section>
+
+        <section class="section-block">
+            <h2 class="section-title">11) طريقة التسويق الصحيحة</h2>
+            <div class="text-content">
+                <strong>أين تنشر؟</strong>
+                <ul>
+                    <li>تيليجرام: أفضل مكان (قنوات العروض).</li>
+                    <li>تيك توك: فيديوهات قصيرة لعروض قوية.</li>
+                    <li>سناب: ستوري خصم + “اكتب الكود”.</li>
+                </ul>
+                <strong>كيف تكتب الإعلان؟</strong> ركز على خصم قوي، "للمستخدمين الجدد فقط"، و "حمّل التطبيق واستخدم الكود".
+            </div>
+        </section>
+
+        <section class="section-block">
+            <h2 class="section-title">12) أهم الأخطاء اللي تخليك تخسر المكافأة</h2>
+            <div class="danger-box">
+                <ul>
+                    <li>❌ المستخدم اشترى من المتصفح بدل التطبيق.</li>
+                    <li>❌ المستخدم مو جديد أصلاً (قد طلب قبل).</li>
+                    <li>❌ فتح الرابط ثم ما اشترى خلال وقت طويل.</li>
+                    <li>❌ استخدم كود غير كودك.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section-block">
+            <h2 class="section-title">13) الخلاصة (مختصر كل الدليل)</h2>
+            <ol>
+                <li>ادخل برنامج الشركاء.</li>
+                <li>روح تبويب الحملة.</li>
+                <li>اختر حملة المستخدم الجديد.</li>
+                <li>انسخ الرابط/الكود.</li>
+                <li>انشره لجمهور “مستخدمين جدد”.</li>
+                <li>اربح 15$ + عمولة.</li>
+            </ol>
+            <div class="notice-box">✅ <strong>نصيحة ذهبية:</strong> أفضل نتائج تجيك من تيليجرام + تيك توك معاً.</div>
+        </section>
+
+        <footer class="footer-note">
+            هذا المحتوى محمي ولا يسمح بنسخه أو مشاركته. أي محاولة نسخ/تصوير قد تؤدي لإيقاف الوصول.
+        </footer>
+    </div>
+
+    <script>
+        const CONFIG = {
+            PASSWORD: "2024", 
+            STORAGE_KEY: "secure_session_v2",
+            DEVICE_KEY: "device_fingerprint",
+            EXPIRY_HOURS: 24
+        };
+
+        function getFingerprint() {
+            return btoa(navigator.userAgent + screen.width + navigator.language);
+        }
+
+        function validateLogin() {
+            const pass = document.getElementById('passwordField').value;
+            const currentFingerprint = getFingerprint();
+            const storedFingerprint = localStorage.getItem(CONFIG.DEVICE_KEY);
+
+            if (pass === CONFIG.PASSWORD) {
+                // نظام الجهاز الواحد
+                if (storedFingerprint && storedFingerprint !== currentFingerprint) {
+                    document.getElementById('login-gate').style.display = 'none';
+                    document.getElementById('device-blocker').style.display = 'flex';
+                    return;
+                }
+
+                if (!storedFingerprint) {
+                    localStorage.setItem(CONFIG.DEVICE_KEY, currentFingerprint);
+                }
+
+                // حفظ الجلسة لمدة 24 ساعة
+                const session = {
+                    active: true,
+                    expires: new Date().getTime() + (CONFIG.EXPIRY_HOURS * 60 * 60 * 1000)
+                };
+                localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(session));
+                unlock();
+            } else {
+                const err = document.getElementById('error-msg');
+                err.style.display = 'block';
+                document.querySelector('.login-card').classList.add('shake');
+                setTimeout(() => document.querySelector('.login-card').classList.remove('shake'), 400);
+            }
+        }
+
+        function unlock() {
+            document.getElementById('login-gate').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+            window.scrollTo(0,0);
+        }
+
+        window.onload = () => {
+            const sessionData = JSON.parse(localStorage.getItem(CONFIG.STORAGE_KEY));
+            const storedFingerprint = localStorage.getItem(CONFIG.DEVICE_KEY);
+            const currentFingerprint = getFingerprint();
+
+            if (sessionData && sessionData.active) {
+                if (new Date().getTime() < sessionData.expires) {
+                    if (storedFingerprint === currentFingerprint) {
+                        unlock();
+                    } else {
+                        document.getElementById('login-gate').style.display = 'none';
+                        document.getElementById('device-blocker').style.display = 'flex';
+                    }
+                } else {
+                    localStorage.removeItem(CONFIG.STORAGE_KEY);
+                }
+            }
+        };
+
+        // 🛡️ أقوى حماية Frontend
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (e.ctrlKey && (e.key === 'c' || e.key === 'u' || e.key === 's' || e.key === 'p' || e.key === 'a')) e.preventDefault();
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) e.preventDefault();
+        });
+        document.addEventListener('dragstart', e => e.preventDefault());
+
+        // تمويه عند الخروج من الصفحة (Screenshot protection)
+        window.onblur = () => { document.body.style.filter = "blur(15px)"; }
+        window.onfocus = () => { document.body.style.filter = "none"; }
+    </script>
+</body>
+</html>
