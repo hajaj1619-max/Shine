@@ -111,6 +111,55 @@
             
         </header>
         <div class="content-card">
+    <div class="section-title">🎥 فيديو تعليمي</div>
+    
+    <div class="video-container">
+        <iframe 
+            src="Z.MP4" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+         WattsApp
+        </iframe>
+    </div>
+
+    <div class="alert-box alert-blue" style="margin-top: 15px;">
+        <strong>💡 ملاحظة هامة:</strong>
+        <p style="font-size: 13px;">هذا الفيديو يوضح لك بالتفصيل كيفية تطبيق الخطوات السابقة بشكل عملي داخل تطبيق شي إن (SHEIN).</p>
+    </div>
+</div>
+
+<style>
+    /* تنسيق إطار الفيديو ليتناسب مع الجوال */
+    .video-container {
+        position: relative;
+        width: 100%;
+        /* أبعاد الفيديو الاحترافية (16:9) */
+        aspect-ratio: 16 / 9; 
+        background: #000;
+        border-radius: 15px;
+        overflow: hidden;
+        border: 2px solid var(--border);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* جعل الكود يعمل بسلاسة عند تدوير الشاشة */
+    @media (max-width: 480px) {
+        .video-container {
+            border-radius: 10px;
+        }
+    }
+</style>
+        <div class="content-card">
             <div class="section-title">🚀 القاعدة الذهبية للربح</div>
             <div class="alert-box alert-orange">
                 <strong>أهم نصيحة:</strong> ركز ترويجك فقط على <strong>كود خصم الـ 50%</strong> للمستخدمين الجدد. هذا هو "المغناطيس" الذي سيجذب أكبر عدد من العملاء ويحقق لك عمولات ضخمة بسرعة.
@@ -208,7 +257,6 @@
             const container = document.getElementById('mediaContainer');
             const overlay = document.getElementById('mediaOverlay');
             if(type === 'video') {
-                container.innerHTML = `<iframe width="100%" height="315" src="Z.MP4" frameborder="0" allowfullscreen></iframe>`;
                 container.innerHTML = `<iframe width="100%" height="315" src="v14044g50000d3cv2j7og65nofb01vcg.mp4" frameborder="0" allowfullscreen></iframe>`;
             } else {
                 container.innerHTML = `<img src="IMG_5863.jpeg" style="width:100%; border-radius:10px;">`;
